@@ -25,7 +25,7 @@ app.post('/api/v1/manga', async(req, res)=>{
             url: `${baseUrl}/manga`,
             params: {
                 title: query,
-                limit:40
+                limit:25
             }
         });
 
