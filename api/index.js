@@ -63,7 +63,8 @@ app.post('/api/v1/chapter', async(req,res)=>{
         url: `${baseUrl}/manga/${id}/feed`,
         params: {
             translatedLanguage: ['en'],
-            order: { "chapter": "desc"}
+            order: { "chapter": "desc"},
+            limit:500
         }
     });
     resp.data.data.map((chap)=>{
