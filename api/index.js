@@ -110,6 +110,25 @@ app.get('/api/v1/ep-link',async (req,res) => {
     fetchStreamingLink(req,res)
 })
 
+
+
+// Proxy endpoint to fetch anime info
+app.get("/api/anime/:id", async (req, res) => {
+    const { id } = req.params;
+    const url = `https://api.consumet.org/anime/gogoanime/info/${id}`;
+    
+    try {
+        const { data } = await axios.get(url);
+        res.json({ success: true, message: data });
+    } catch (error) {
+        res.status(500).json({ 
+            success: false, 
+            message: "Failed to fetch anime data", 
+            error: error.message 
+        });
+    }
+});
+
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
 export default app;
