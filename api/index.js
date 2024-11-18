@@ -130,6 +130,18 @@ app.post("/api/v1/anime", async (req, res) => {
     }
 });
 
+app.get('/proxy-m3u8', async (req, res) => {
+    const m3u8Url = req.query.url; // Get the URL from the query string
+    
+    try {
+      const response = await axios.get(m3u8Url, { headers: { 'Referer': 'https://s3embtaku.pro' } });
+      res.setHeader('Access-Control-Allow-Origin', '*');  // Allow your front-end to access it
+      res.send(response.data);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch M3U8 content' });
+    }
+  });
+
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
 export default app;
