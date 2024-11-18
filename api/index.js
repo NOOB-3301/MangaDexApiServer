@@ -77,6 +77,8 @@ app.post('/api/v1/chapter', async(req,res)=>{
 })
 
 
+
+//anime routes..........
 app.get('/api/v1/recent-anime', async(req,res)=>{
     console.log('hello')
     // res.send("anime")
