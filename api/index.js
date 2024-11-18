@@ -115,7 +115,7 @@ app.get('/api/v1/ep-link',async (req,res) => {
 // Proxy endpoint to fetch anime info
 app.get("/api/anime/:id", async (req, res) => {
     const { id } = req.params;
-    const url = `https://api.consumet.org/anime/gogoanime/info/${id}`;
+    const url = `https://animeapi-xi.vercel.app/anime/gogoanime/info/${id}`;
     
     try {
         const { data } = await axios.get(url);
