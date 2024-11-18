@@ -138,6 +138,10 @@ app.post('/proxy-m3u8', async (req, res) => {
       const response = await axios.get(m3u8Url, { headers: { 'Referer': Referer } });
       res.setHeader('Access-Control-Allow-Origin', '*');  // Allow your front-end to access it
       res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+
       res.send(response.data);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch M3U8 content' });
