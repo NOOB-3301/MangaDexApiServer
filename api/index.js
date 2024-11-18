@@ -84,7 +84,7 @@ app.get('/api/v1/recent-anime', async(req,res)=>{
 })
 
 
-app.get('/api/v1/search', async (req, res) => {
+app.post('/api/v1/search', async (req, res) => {
     const { query, page } = req.body; // Ensure you are using req.body for POST requests
     try {
         const encodedQuery = encodeURIComponent(query); // Encode the query to handle spaces and special characters
