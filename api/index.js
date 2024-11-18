@@ -110,8 +110,6 @@ app.get('/api/v1/ep-link',async (req,res) => {
     fetchStreamingLink(req,res)
 })
 
-
-
 // Proxy endpoint to fetch anime info
 app.get("/api/anime/:id", async (req, res) => {
     const { id } = req.params;
@@ -119,7 +117,7 @@ app.get("/api/anime/:id", async (req, res) => {
     
     try {
         const { data } = await axios.get(url);
-        res.json({ success: true, message: data });
+        res.status(200).json({ message: data });
     } catch (error) {
         res.status(500).json({ 
             success: false, 
