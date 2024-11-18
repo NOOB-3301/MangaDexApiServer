@@ -111,8 +111,8 @@ app.get('/api/v1/ep-link',async (req,res) => {
 })
 
 // Proxy endpoint to fetch anime info
-app.get("/api/anime/:id", async (req, res) => {
-    const { id } = req.params;
+app.post("/api/v1/anime", async (req, res) => {
+    const { id } = req.body;
     const url = `https://animeapi-xi.vercel.app/anime/gogoanime/info/${id}`;
     
     try {
