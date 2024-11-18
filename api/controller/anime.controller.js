@@ -27,6 +27,9 @@ export async function fetchStreamingLink(req,res) {
     console.log(url)
     try {
         const resp = await axios.get(url, { params: { server: "gogocdn" } });
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your front-end domain
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         return res.status(200).send({message:resp.data})
         // console.log(resp.data)
     } catch (err) {
