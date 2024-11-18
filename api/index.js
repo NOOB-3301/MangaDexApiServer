@@ -102,7 +102,7 @@ app.get('/api/v1/search', async (req, res) => {
     }
 });
 
-app.get('/api/v1/top-anime',async(req,res)=>{
+app.post('/api/v1/top-anime',async(req,res)=>{
     fetchTopAnime(req,res)
 })
 

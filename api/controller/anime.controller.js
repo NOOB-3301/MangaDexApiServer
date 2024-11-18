@@ -11,9 +11,10 @@ export async function fetchRecentAnime(req,res) {
 }
 
 export async function fetchTopAnime(req,res) {
+    const {page}= req.body 
     const url = "https://animeapi-xi.vercel.app/anime/gogoanime/top-airing";
     try {
-        const { data } = await axios.get(url, { params: { page: 1 } });
+        const { data } = await axios.get(url, { params: { page: page } });
         return res.status(200).send({message:data})
     } catch (err) {
         throw new Error(err.message);
