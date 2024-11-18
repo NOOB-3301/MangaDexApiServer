@@ -1,6 +1,7 @@
 import express from "express"
 import axios from 'axios'
 import cors from 'cors'
+import { fetchRecentAnime, fetchStreamingLink, fetchTopAnime} from "./controller/anime.controller.js";
 
 
 const app = express();
@@ -74,6 +75,41 @@ app.post('/api/v1/chapter', async(req,res)=>{
     // chaplist = resp.data.data
     res.status(200).send({msg:"manga fetched success" , data:resp.data.data})
 })
+
+
+app.get('/api/v1/recent-anime', async(req,res)=>{
+    console.log('hello')
+    // res.send("anime")
+    fetchRecentAnime(req,res)
+})
+
+
+app.get('/api/v1/search', async (req, res) => {
+    const { query, page } = req.body; // Ensure you are using req.body for POST requests
+    try {
+        const encodedQuery = encodeURIComponent(query); // Encode the query to handle spaces and special characters
+        const apiUrl = `https://animeapi-xi.vercel.app/anime/gogoanime/${encodedQuery}?page=${page}`;
+        
+        console.log(query, page);
+        console.log(apiUrl);
+
+        const response = await axios.get(apiUrl);
+        return res.status(200).send({ message: response.data });
+    } catch (err) {
+        console.error(err); // Log the complete error to help debug
+        const errorMessage = err.response?.data || err.message || "An unexpected error occurred";
+        res.status(400).send({ error: errorMessage });
+    }
+});
+
+app.get('/api/v1/top-anime',async(req,res)=>{
+    fetchTopAnime(req,res)
+})
+
+app.get('/api/v1/ep-link',async (req,res) => {
+    fetchStreamingLink(req,res)
+})
+
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
 export default app;
