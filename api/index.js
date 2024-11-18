@@ -109,6 +109,9 @@ app.post('/api/v1/top-anime',async(req,res)=>{
 })
 
 app.post('/api/v1/ep-link',async (req,res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your front-end domain
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     fetchStreamingLink(req,res)
 })
 
@@ -119,9 +122,6 @@ app.post("/api/v1/anime", async (req, res) => {
     
     try {
         const { data } = await axios.get(url);
-        res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your front-end domain
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         res.status(200).json({ message: data });
     } catch (error) {
         res.status(500).json({ 
